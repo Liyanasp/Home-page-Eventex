@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eventex | Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    input {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      background: #ff4d4f;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Register</h2>
+  <input type="text" id="name" placeholder="Full Name" required />
+  <input type="email" id="email" placeholder="Email" required />
+  <input type="password" id="password" placeholder="Password" required />
+  <button onclick="register()">Sign Up</button>
+  <a href="login.html">Already have an account? Login</a>
+</div>
+
+<script>
+  function register() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if (!name || !email || !password) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    // Simulate storing in localStorage
+    localStorage.setItem("eventexUser", JSON.stringify({ name, email, password }));
+    alert("Registration successful! Redirecting to login...");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>
