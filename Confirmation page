@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Confirm Booking | Eventex</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 2rem; }
+    .confirm-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; }
+    .details { margin: 1rem 0; }
+    .details p { margin: 0.5rem 0; }
+    button {
+      width: 48%; padding: 0.75rem;
+      margin-top: 1rem;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .confirm-btn { background-color: #28a745; color: white; }
+    .cancel-btn { background-color: #ccc; color: black; float: right; }
+  </style>
+</head>
+<body>
+
+<div class="confirm-container">
+  <h2>Confirm Your Booking</h2>
+  <div class="details" id="bookingDetails"></div>
+
+  <button class="confirm-btn" onclick="confirmBooking()">Confirm</button>
+  <button class="cancel-btn" onclick="cancelBooking()">Cancel</button>
+</div>
+
+<script>
+  const data = JSON.parse(localStorage.getItem('pendingBooking'));
+
+  if (!data) {
+    alert("No booking found.");
+    window.location.href = "booking.html";
+  }
+
+  const details = `
+    <p><strong>Event Type:</strong> ${data.eventType}</p>
+    <p><strong>Staff Count:</strong> ${data.staffCount}</p>
+    <p><strong>Date:</strong> ${data.eventDate}</p>
+    <p><strong>Location:</strong> ${data.eventLocation}</p>
+    <p><strong>Notes:</strong> ${data.notes || "None"}</p>
+  `;
+
+  document.getElementById("bookingDetails").innerHTML = details;
+
+  function confirmBooking() {
+    localStorage.setItem("confirmedBooking", JSON.stringify(data));
+    localStorage.removeItem("pendingBooking");
+    window.location.href = "success.html";
+  }
+
+  function cancelBooking() {
+    localStorage.removeItem("pendingBooking");
+    window.location.href = "booking.html";
+  }
+</script>
+
+</body>
+</html>
