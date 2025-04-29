@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eventex | Book Event Staff</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      padding: 2rem;
+    }
+    .booking-form {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      background: #ff4d4f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="booking-form">
+  <h2>Book Event Staff</h2>
+  
+  <label for="eventType">Select Event Type:</label>
+  <select id="eventType">
+    <option value="annual_day">Annual Day</option>
+    <option value="marriage">Marriage Function</option>
+    <option value="corporate">Corporate Event</option>
+    <option value="birthday">Birthday Party</option>
+    <option value="other">Other</option>
+  </select>
+
+  <label for="staffCount">Number of Staff Required:</label>
+  <input type="number" id="staffCount" min="1" max="50" />
+
+  <label for="date">Event Date:</label>
+  <input type="date" id="date" />
+
+  <label for="location">Event Location:</label>
+  <input type="text" id="location" placeholder="City, Venue Name..." />
+
+  <label for="notes">Additional Notes:</label>
+  <textarea id="notes" rows="4" placeholder="Any special instructions..."></textarea>
+
+  <button onclick="submitBooking()">Submit Booking</button>
+</div>
+
+<script>
+  function submitBooking() {
+    const eventType = document.getElementById('eventType').value;
+    const staffCount = document.getElementById('staffCount').value;
+    const date = document.getElementById('date').value;
+    const location = document.getElementById('location').value;
+    const notes = document.getElementById('notes').value;
+
+    if (!staffCount || !date || !location) {
+      alert("Please fill all required fields.");
+      return;
+    }
+
+    const bookingDetails = {
+      eventType,
+      staffCount,
+      date,
+      location,
+      notes
+    };
+
+    // Simulate storing booking (you could send this to a server)
+    localStorage.setItem("eventexBooking", JSON.stringify(bookingDetails));
+
+    alert("Your booking has been submitted!");
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>
