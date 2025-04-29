@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eventex | Book Event</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 2rem; }
+    .form-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label { display: block; margin-top: 1rem; }
+    select, input, textarea {
+      width: 100%; padding: 0.75rem; margin-top: 0.5rem;
+      border: 1px solid #ccc; border-radius: 5px;
+    }
+    button {
+      margin-top: 1.5rem; width: 100%; padding: 0.75rem;
+      background: #ff4d4f; color: white;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Book Event Staff</h2>
+
+  <label>Event Type:</label>
+  <select id="eventType">
+    <option value="Annual Day">Annual Day</option>
+    <option value="Marriage">Marriage Function</option>
+    <option value="Corporate">Corporate Event</option>
+    <option value="Birthday">Birthday Party</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label>Staff Required:</label>
+  <input type="number" id="staffCount" min="1" />
+
+  <label>Date:</label>
+  <input type="date" id="eventDate" />
+
+  <label>Location:</label>
+  <input type="text" id="eventLocation" />
+
+  <label>Notes:</label>
+  <textarea id="notes" rows="4" placeholder="Special instructions..."></textarea>
+
+  <button onclick="saveBooking()">Next: Confirm Booking</button>
+</div>
+
+<script>
+  function saveBooking() {
+    const data = {
+      eventType: document.getElementById('eventType').value,
+      staffCount: document.getElementById('staffCount').value,
+      eventDate: document.getElementById('eventDate').value,
+      eventLocation: document.getElementById('eventLocation').value,
+      notes: document.getElementById('notes').value
+    };
+
+    if (!data.staffCount || !data.eventDate || !data.eventLocation) {
+      alert("Please complete all required fields.");
+      return;
+    }
+
+    localStorage.setItem('pendingBooking', JSON.stringify(data));
+    window.location.href = "confirm.html";
+  }
+</script>
+
+</body>
+</html>
